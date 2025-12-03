@@ -2,11 +2,11 @@
 
 A stunning, Netflix-inspired personal portfolio website that showcases your projects, skills, and experience with a sleek, modern interface.
 
-![Portfolio Preview](./preview.png)
+<img width="1919" height="879" alt="Portfolio Preview" src="https://github.com/user-attachments/assets/32883ca7-4f74-4176-9a0a-c25345034b9d" />
 
 ## 🌟 Live Demo
 
-[View Live Website](#) <!-- Add your deployment URL -->
+**[View Live Website](https://pravinsakhare.in/)**
 
 ## ✨ Features
 
@@ -208,8 +208,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 **Pravin Sakhare**
 
 - GitHub: [@pravinsakhare](https://github.com/pravinsakhare)
-- LinkedIn: [Your LinkedIn](#) <!-- Add your LinkedIn URL -->
-- Portfolio: [Your Website](#) <!-- Add your website URL -->
+- LinkedIn: [My LinkedIn](https://www.linkedin.com/in/pravinsakhare/) <!-- Add your LinkedIn URL -->
+- Portfolio: [My Website](https://www.linkedin.com/in/pravinsakhare/) <!-- Add your website URL -->
 
 ## 🙏 Acknowledgments
 
@@ -220,16 +220,13 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 📸 Screenshots
 
 ### Desktop View
-![Desktop Screenshot](<img width="1919" height="872" alt="image" src="https://github.com/user-attachments/assets/6a78a62c-de55-455b-b640-1e1dd6c8cc36" />
-)
+<img width="1919" height="872" alt="Desktop Screenshot" src="https://github.com/user-attachments/assets/6a78a62c-de55-455b-b640-1e1dd6c8cc36" />
 
 ### Mobile View
-![Mobile Screenshot](<img width="1919" height="868" alt="image" src="https://github.com/user-attachments/assets/cad7e766-91ca-45b4-befc-9a76ca66dda3" />
-)
+<img width="1919" height="868" alt="Mobile Screenshot" src="https://github.com/user-attachments/assets/cad7e766-91ca-45b4-befc-9a76ca66dda3" />
 
 ### Project Cards
-![Project Cards](<img width="1919" height="862" alt="image" src="https://github.com/user-attachments/assets/478753ef-5dae-4fbf-a8ea-7dfaecc2b071" />
-)
+<img width="1919" height="862" alt="Project Cards" src="https://github.com/user-attachments/assets/478753ef-5dae-4fbf-a8ea-7dfaecc2b071" />
 
 ---
 
