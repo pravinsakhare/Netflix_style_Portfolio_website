@@ -51,23 +51,38 @@ export default function ContactSection() {
     setErrors(newErrors);
     return isValid;
   };
+const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  if (!validateForm()) return;
 
-    if (!validateForm()) return;
+  setIsSubmitting(true);
 
-    setIsSubmitting(true);
+  try {
+    const response = await fetch('/api/contact', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData),
+    });
 
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 2000));
+    if (!response.ok) {
+      throw new Error('Failed to submit form');
+    }
 
-    setIsSubmitting(false);
     setIsSubmitted(true);
-    setFormData({ name: "", email: "", message: "" });
+    setFormData({ name: '', email: '', message: '' });
 
     setTimeout(() => setIsSubmitted(false), 5000);
-  };
+  } catch (error) {
+    console.error(error);
+    alert('Something went wrong. Please try again.');
+  } finally {
+    setIsSubmitting(false);
+  }
+};
+
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
