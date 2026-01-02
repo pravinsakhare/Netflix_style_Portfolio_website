@@ -4,11 +4,20 @@ const nextConfig = {
     images: {
         domains: ['images.unsplash.com'],
     },
-    output: 'standalone', // ← Add this for Docker!
-    i18n: {
-        locales: ['en', 'fr', 'es'],
-        defaultLocale: 'en',
-    }
+    output: 'standalone',
+    // Tempo configuration
+    devIndicators: {
+        appIsrStatus: false,
+    },
+    webpack: (config) => {
+        config.watchOptions = {
+            ...config.watchOptions,
+            ignored: ['**/tempobook/**', '**/node_modules/**'],
+        };
+        return config;
+    },
+    // Allow external hosts in development for Tempo
+    allowedDevOrigins: ['*'],
 };
 
-module.exports = nextConfig; // ← Only ONE export!  
+module.exports = nextConfig;  
