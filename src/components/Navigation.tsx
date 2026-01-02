@@ -42,7 +42,7 @@ export default function Navigation() {
           </motion.div>
 
           <div className="hidden md:flex items-center space-x-8">
-            {["About", "Projects", "Skills", "Experience", "Contact"].map(
+            {["About", "Projects", "Skills", "Experience", "Blog", "Contact"].map(
               (item) => (
                 <button
                   key={item}
