@@ -25,15 +25,15 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="bg-[#0a0a0a] border-t border-[#333] py-12">
+    <footer className="bg-[#0a0a0a] border-t border-[#222] py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col items-center justify-center space-y-6">
           {/* Logo/Name */}
           <motion.div
-            className="text-3xl font-bold text-[#E50914]"
+            className="text-3xl font-bold text-brand-red"
             whileHover={{ scale: 1.05 }}
           >
-            PS
+            GZZMONK
           </motion.div>
 
           {/* Social Links */}
@@ -77,7 +77,7 @@ export default function Footer() {
           {/* Copyright */}
           <div className="text-center text-sm text-[#b3b3b3]">
             <p className="flex items-center gap-2 justify-center">
-              Made with <FaHeart className="text-[#E50914]" /> by Pravin Sakhare
+              Made with <FaHeart className="text-brand-red" /> by Pravin Sakhare
             </p>
             <p className="mt-2">
               © {currentYear} All rights reserved.

@@ -1,7 +1,2 @@
-import { MongoClient } from 'mongodb';
-
-declare global {
-  var _mongoClientPromise: Promise<MongoClient>;
-}
-
+// Removed MongoDB global declaration for static export
 export {};

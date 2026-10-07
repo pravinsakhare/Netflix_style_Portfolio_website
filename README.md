@@ -1,12 +1,12 @@
 # 🎬 Netflix Style Portfolio Website
 
-A stunning, Netflix-inspired personal portfolio website that showcases your projects, skills, and experience with a sleek, modern interface. Now featuring a full-stack architecture with MongoDB backend integration.
+A stunning, Netflix-inspired personal portfolio website that showcases your projects, skills, and experience with a sleek, modern interface.
 
 <img width="1919" height="879" alt="Portfolio Preview" src="https://github.com/user-attachments/assets/32883ca7-4f74-4176-9a0a-c25345034b9d" />
 
 ## 🌟 Live Demo
 
-**[View Live Website](https://pravinsakhare.in/)**
+**[View Live Website](https://gzzmonk.space/)**
 
 ## ✨ Features
 
@@ -18,7 +18,7 @@ A stunning, Netflix-inspired personal portfolio website that showcases your proj
 - 🔍 **SEO Optimized** - Built with best practices for search engines
 - ♿ **Accessible** - WCAG compliant with keyboard navigation support
 - 📊 **Dynamic Content** - Easy to update projects and information
-- 🗄️ **MongoDB Backend** - Persistent data storage for contact form submissions
+- <!-- MongoDB backend removed for static deployment -->
 - 🐳 **Docker Support** - Easy deployment with Docker and Docker Compose
 - 📮 **Contact Form API** - Backend API endpoint for form submissions
 
@@ -186,34 +186,15 @@ Netflix_style_Portfolio_website/
 └── tsconfig.json          # TypeScript configuration
 ```
 
-## 🔌 API Endpoints
+## 🔌 Contact API (Cloudflare Pages Functions)
 
-### POST /api/contact
+The contact form is handled by a Cloudflare Pages Function at `functions/api/contact.js`. To deploy on Cloudflare Pages, set these environment variables in the Pages dashboard:
 
-Submit contact form data.
+- `RESEND_API_KEY` — API key for Resend (used to send email notifications)
+- `CONTACT_TO_EMAIL` — Destination email address to receive messages
 
-**Request Body:**
-```json
-{
-  "name": "John Doe",
-  "email": "john@example.com",
-  "message": "Hello, I'd like to connect!"
-}
-```
+The contact endpoint expects a POST JSON body with `name`, `email`, `message`, and an optional hidden `website` honeypot field. The function validates inputs and forwards successful messages to the configured email via Resend.
 
-**Response (200 OK):**
-```json
-{
-  "message": "Message saved successfully"
-}
-```
-
-**Response (500 Error):**
-```json
-{
-  "message": "Failed to save message"
-}
-```
 
 ## 🗄️ Database Schema
 

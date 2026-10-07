@@ -1,43 +1,18 @@
 # Use official Node.js LTS image
-FROM node:20-alpine AS base
-
-# Install dependencies only when needed
-FROM base AS deps
+FROM node:20-alpine AS deps
 WORKDIR /app
-
-# Copy package files
 COPY package.json package-lock.json* ./
+RUN npm ci --production
 
-# Install dependencies
-RUN npm ci
-
-# Rebuild the source code only when needed
-FROM base AS builder
+# Build stage
+FROM node:20-alpine AS build
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
-
-# Build Next.js app
 RUN npm run build
 
-# Production image, copy all the files and run next
-FROM base AS runner
-WORKDIR /app
-
-ENV NODE_ENV=production
-
-# Create a non-root user
-RUN addgroup --system --gid 1001 nodejs
-RUN adduser --system --uid 1001 nextjs
-# Copy built files
-COPY --from=builder /app/.next/standalone ./
-COPY --from=builder /app/.next/static ./.next/static
-RUN mkdir -p public
-
-USER nextjs
-
-EXPOSE 3000
-
-ENV PORT=3000
-
-CMD ["node", "server.js"]
+# Nginx stage to serve static /out
+FROM nginx:alpine AS runner
+COPY --from=build /app/out /usr/share/nginx/html
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]

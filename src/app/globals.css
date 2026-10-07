@@ -4,10 +4,9 @@
 
 @layer base {
   :root {
-    --netflix-red: #E50914;
-    --netflix-black: #141414;
-    --netflix-dark-gray: #1f1f1f;
-    --netflix-light-gray: #b3b3b3;
+    --brand-red: #E50914;
+    --near-black: #0b0b0b;
+    --soft-gray: #bfc5c9;
   }
   
   :root {
@@ -55,6 +54,45 @@
     --ring: 0 89% 49%;
   }
 }
+
+/* Design utilities */
+.glass-card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.red-glow {
+  box-shadow: 0 14px 40px rgba(229,9,20,0.14);
+}
+
+.film-grain::after {
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='1600' height='900'><filter id='noise'><feTurbulence baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='100%' height='100%' filter='url(%23noise)' opacity='0.03'/></svg>");
+  mix-blend-mode: overlay;
+}
+
+.vignette::after {
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.6) 100%);
+}
+
+.gradient-text {
+  background: linear-gradient(90deg, #fff, rgba(229,9,20,0.9));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ensure soft-gray variable available as utility class color fallback */
+:root{--soft-gray:#bfc5c9}
 
 @layer base {
   * {

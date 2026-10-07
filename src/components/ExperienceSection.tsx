@@ -17,6 +17,21 @@ interface TimelineItem {
 const timelineData: TimelineItem[] = [
   {
     type: "work",
+    title: "SaaS Cloud Operations Specialist",
+    organization: "Acoustic Marketing India",
+    location: "Pune",
+    period: "// TODO: period (~6 months)",
+    description: [
+      "Monitored multi-region AWS infrastructure organised into region-based pods using dashboards and alerts, and responded to degradation",
+      "Handled ~70-80 production tickets/month with <10 min response and <1-2 hr resolution times, maintaining 99.7% uptime",
+      "Responded to 2-3 major incidents per week, wrote RCAs to prevent recurrence, and coordinated with engineering teams",
+      "Part of a monthly on-call rotation covering morning, afternoon and night shifts",
+      "Wrote a Kubernetes troubleshooting SOP, updated the SSL renewal SOP and refreshed outdated SOPs",
+    ],
+    icon: FaBriefcase,
+  },
+  {
+    type: "work",
     title: "Growth Associate",
     organization: "Talenlio International Pvt. Ltd.",
     location: "Pune",
@@ -56,7 +71,7 @@ const timelineData: TimelineItem[] = [
   },
   {
     type: "education",
-    title: "Bachelor's Degree",
+    title: "BCA in Cloud Computing",
     organization: "DY Patil International University",
     location: "Pune",
     period: "2022 - 2025",
@@ -119,7 +134,7 @@ function TimelineCard({
         whileHover={{ scale: 1.02 }}
       >
         <motion.div
-          className="bg-[#1f1f1f] p-6 rounded-lg border border-[#333] hover:border-[#E50914] transition-all duration-300 cursor-pointer"
+          className="bg-[#0f0f0f] p-6 rounded-lg border border-[#222] transition-all duration-300 cursor-pointer glass-card"
           onClick={() => setIsExpanded(!isExpanded)}
           whileHover={{
             boxShadow: `0 0 20px ${getTypeColor(item.type)}40`,
@@ -181,31 +196,22 @@ function TimelineCard({
         </motion.div>
       </motion.div>
 
-      {/* Timeline dot */}
+      {/* Timeline dot with tenure progress */}
       <div className="w-full md:w-2/12 flex justify-center my-4 md:my-0">
-        <motion.div
-          className="relative"
-          initial={{ scale: 0 }}
-          animate={{ scale: 1 }}
-          transition={{ duration: 0.5, delay: index * 0.2 }}
-        >
-          <motion.div
-            className="w-6 h-6 rounded-full border-4 z-10 relative"
-            style={{
-              backgroundColor: getTypeColor(item.type),
-              borderColor: "#141414",
-            }}
-            whileHover={{ scale: 1.5 }}
-            animate={{
-              boxShadow: [
-                `0 0 0 ${getTypeColor(item.type)}00`,
-                `0 0 20px ${getTypeColor(item.type)}80`,
-                `0 0 0 ${getTypeColor(item.type)}00`,
-              ],
-            }}
-            transition={{ duration: 2, repeat: Infinity }}
+        <div className="relative w-16 h-24 flex items-center justify-center">
+          <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-2 h-full bg-[#111] rounded-full" />
+          <div
+            className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-2 rounded-full bg-brand-red"
+            style={{ height: isExpanded ? "80%" : "40%", transition: "height 300ms" }}
           />
-        </motion.div>
+          <div className="relative z-10">
+            <motion.div
+              className="w-6 h-6 rounded-full border-4 z-10 relative"
+              style={{ backgroundColor: getTypeColor(item.type), borderColor: "#141414" }}
+              whileHover={{ scale: 1.3 }}
+            />
+          </div>
+        </div>
       </div>
 
       {/* Empty space for alternating layout */}

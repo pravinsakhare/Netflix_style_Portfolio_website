@@ -5,10 +5,22 @@ import { motion } from "framer-motion";
 
 export default function Navigation() {
   const [scrolled, setScrolled] = useState(false);
+  const [active, setActive] = useState("");
 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
+      const sections = ["about", "projects", "skills", "experience", "contact"];
+      for (const s of sections) {
+        const el = document.getElementById(s);
+        if (el) {
+          const rect = el.getBoundingClientRect();
+          if (rect.top <= 120 && rect.bottom >= 120) {
+            setActive(s);
+            break;
+          }
+        }
+      }
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -34,11 +46,11 @@ export default function Navigation() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <motion.div
-            className="text-2xl font-bold text-[#E50914] cursor-pointer"
+            className="text-2xl font-bold text-brand-red cursor-pointer"
             whileHover={{ scale: 1.05 }}
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
           >
-            PS
+            GZZMONK
           </motion.div>
 
           <div className="hidden md:flex items-center space-x-8">
@@ -47,7 +59,7 @@ export default function Navigation() {
                 <button
                   key={item}
                   onClick={() => scrollToSection(item.toLowerCase())}
-                  className="text-white hover:text-[#E50914] transition-colors duration-300 text-sm font-medium"
+                  className={`text-sm font-medium transition-colors duration-300 ${active===item.toLowerCase()? 'text-brand-red': 'text-white hover:text-brand-red'}`}
                 >
                   {item}
                 </button>

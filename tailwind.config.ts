@@ -19,6 +19,9 @@ const config = {
     },
     extend: {
       colors: {
+        "brand-red": "#E50914",
+        "near-black": "#0b0b0b",
+        "soft-gray": "#bfc5c9",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -52,6 +55,17 @@ const config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+      },
+      boxShadow: {
+        "red-glow": "0 8px 30px rgba(229,9,20,0.18)",
+        grain: "inset 0 0 0 1000px rgba(255,255,255,0.01)",
+      },
+      backgroundImage: {
+        "red-gradient": "linear-gradient(120deg, rgba(229,9,20,0.06), transparent 40%)",
+        "subtle-radial": "radial-gradient(40% 60% at 10% 10%, rgba(229,9,20,0.06), transparent 20%)",
+      },
+      transitionTimingFunction: {
+        cinematic: "cubic-bezier(.2,.8,.2,1)",
       },
       borderRadius: {
         lg: "var(--radius)",

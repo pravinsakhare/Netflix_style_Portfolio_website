@@ -3,8 +3,9 @@
 const nextConfig = {
     images: {
         domains: ['images.unsplash.com'],
+        unoptimized: true,
     },
-    output: 'standalone',
+    output: 'export',
     // Tempo configuration
     devIndicators: {
         appIsrStatus: false,
@@ -17,6 +18,7 @@ const nextConfig = {
         return config;
     },
     // Allow external hosts in development for Tempo
+    // Note: allowedDevOrigins left as-is if present previously; remove if incompatible with Next export
     allowedDevOrigins: ['*'],
 };
 

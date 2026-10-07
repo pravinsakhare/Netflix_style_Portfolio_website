@@ -2,7 +2,7 @@
 
 import { motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
-import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
+import { FaGithub, FaExternalLinkAlt, FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import {
   SiAmazon,
   SiTypescript,
@@ -10,9 +10,9 @@ import {
   SiApache,
   SiDocker,
   SiKubernetes,
-  SiPython,
-  SiMysql,
+  SiGithub,
 } from "react-icons/si";
+import ProjectModal from "./ProjectModal";
 
 interface Project {
   title: string;
@@ -23,158 +23,202 @@ interface Project {
   github?: string;
 }
 
+const fallbackImage =
+  "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?auto=format&fit=crop&w=1200&q=80";
+
 const projects = {
   "AWS Cloud Projects": [
     {
       title: "PixelFlare Photo Studio",
       description:
         "Full-stack photo studio website with responsive design. Implemented AWS DynamoDB for data storage, S3 for media hosting, CloudFront for CDN, and EC2 with Apache2 for deployment. Features modern UI/UX designed with Figma.",
-      image: "https://images.unsplash.com/photo-1542831371-29b0f74f9713?w=800&q=80",
+      image: "https://images.unsplash.com/photo-1542831371-29b0f74f9713?w=1200&q=80",
       technologies: [
         { name: "AWS", icon: SiAmazon },
         { name: "TypeScript", icon: SiTypescript },
         { name: "Tailwind", icon: SiTailwindcss },
       ],
       liveDemo: "https://gzzmonk.me/",
-      github: "https://github.com/pravinsakhare",
+      github: "https://github.com/pravinsakhare/pixelflare-photo-studio",
     },
     {
       title: "Secure Static Website Deployment",
       description:
         "Production-ready static website deployment on AWS EC2 with automated SSL certificate management via Let's Encrypt. Configured Apache virtual hosts, HTTPS redirection, Route53 domain management, and implemented AWS security best practices.",
-      image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&q=80",
+      image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1200&q=80",
       technologies: [
         { name: "AWS EC2", icon: SiAmazon },
         { name: "Apache", icon: SiApache },
       ],
-      liveDemo: "https://github.com/pravinsakhare/aws-secure-website-deployment-guide",
+      liveDemo: "https://gzzmonk.me/",
       github: "https://github.com/pravinsakhare/aws-secure-website-deployment-guide",
     },
     {
-      title: "Cloud Infrastructure Automation",
-      description:
-        "Automated cloud infrastructure provisioning using AWS CloudFormation and Terraform. Implemented VPC configuration, security groups, load balancers, and auto-scaling groups for high availability.",
-      image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&q=80",
+      title: "Kubernetes CI/CD Platform Lab",
+      description: "// TODO: one-line description from repo README",
+      image: "https://images.unsplash.com/photo-1667372393119-3d4c48d07fc9?w=1200&q=80",
       technologies: [
-        { name: "AWS", icon: SiAmazon },
-        { name: "Python", icon: SiPython },
+        { name: "Kubernetes", icon: SiKubernetes },
+        { name: "Docker", icon: SiDocker },
+        { name: "GitHub Actions", icon: SiGithub },
       ],
-      github: "https://github.com/pravinsakhare",
+      github: "https://github.com/pravinsakhare/platform-engineering-lab",
+    },
+    {
+      title: "3-Tier AWS Web Application",
+      description: "// TODO: repo URL and one-line description",
+      image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1200&q=80",
+      technologies: [{ name: "AWS", icon: SiAmazon }],
+      github: "https://github.com/pravinsakhare/3-tier-aws-webapp",
     },
   ],
   "DevOps & Infrastructure": [
     {
-      title: "Container Orchestration",
+      title: "PixelFlare Photo Studio",
       description:
-        "Kubernetes cluster setup and management for microservices deployment. Implemented CI/CD pipelines with automated testing, Docker containerization, and monitoring with CloudWatch.",
-      image: "https://images.unsplash.com/photo-1667372393119-3d4c48d07fc9?w=800&q=80",
-      technologies: [
-        { name: "Kubernetes", icon: SiKubernetes },
-        { name: "Docker", icon: SiDocker },
-      ],
-      github: "https://github.com/pravinsakhare",
-    },
-    {
-      title: "Database Management System",
-      description:
-        "Designed and implemented relational database solutions using MySQL and AWS RDS. Optimized queries, implemented backup strategies, and ensured data security with encryption.",
-      image: "https://images.unsplash.com/photo-1544383835-bda2bc66a55d?w=800&q=80",
-      technologies: [
-        { name: "MySQL", icon: SiMysql },
-        { name: "AWS RDS", icon: SiAmazon },
-      ],
-      github: "https://github.com/pravinsakhare",
-    },
-    {
-      title: "Network Security Implementation",
-      description:
-        "Implemented comprehensive network security using AWS VPC, security groups, NACLs, and VPN. Conducted security audits with Nmap and AWS Inspector for vulnerability assessment.",
-      image: "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=800&q=80",
+        "Full-stack photo studio website with responsive design. Implemented AWS DynamoDB for data storage, S3 for media hosting, CloudFront for CDN, and EC2 with Apache2 for deployment. Features modern UI/UX designed with Figma.",
+      image: "https://images.unsplash.com/photo-1542831371-29b0f74f9713?w=1200&q=80",
       technologies: [
         { name: "AWS", icon: SiAmazon },
-        { name: "Python", icon: SiPython },
+        { name: "TypeScript", icon: SiTypescript },
+        { name: "Tailwind", icon: SiTailwindcss },
       ],
-      github: "https://github.com/pravinsakhare",
+      liveDemo: "https://gzzmonk.me/",
+      github: "https://github.com/pravinsakhare/pixelflare-photo-studio",
+    },
+    {
+      title: "Secure Static Website Deployment",
+      description:
+        "Production-ready static website deployment on AWS EC2 with automated SSL certificate management via Let's Encrypt. Configured Apache virtual hosts, HTTPS redirection, Route53 domain management, and implemented AWS security best practices.",
+      image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1200&q=80",
+      technologies: [
+        { name: "AWS EC2", icon: SiAmazon },
+        { name: "Apache", icon: SiApache },
+      ],
+      github: "https://github.com/pravinsakhare/aws-secure-website-deployment-guide",
     },
   ],
 };
 
-function ProjectCard({ project }: { project: Project }) {
+function ProjectCard({
+  project,
+  onOpen,
+}: {
+  project: Project;
+  onOpen: (project: Project) => void;
+}) {
   const [isHovered, setIsHovered] = useState(false);
+  const [isFocused, setIsFocused] = useState(false);
+
+  const reveal = isHovered || isFocused;
+
+  const openProject = (event?: React.MouseEvent | React.KeyboardEvent) => {
+    event?.stopPropagation();
+    onOpen(project);
+  };
+
+  const onKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      openProject(event);
+    }
+  };
 
   return (
     <motion.div
-      className="relative flex-shrink-0 w-[350px] h-[200px] rounded-lg overflow-hidden cursor-pointer group"
+      tabIndex={0}
+      role="button"
+      aria-label={`Open project details for ${project.title}`}
+      onKeyDown={onKeyDown}
+      onClick={openProject}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      whileHover={{ scale: 1.1, zIndex: 10 }}
-      transition={{ duration: 0.3 }}
+      onFocus={() => setIsFocused(true)}
+      onBlur={() => setIsFocused(false)}
+      whileHover={{ scale: 1.03, y: -4, zIndex: 10 }}
+      transition={{ duration: 0.25 }}
+      className="group relative snap-start flex-shrink-0 w-[85vw] sm:w-[350px] h-[220px] sm:h-[200px] rounded-xl overflow-visible cursor-pointer select-none outline-none"
     >
-      <img
-        src={project.image}
-        alt={project.title}
-        className="w-full h-full object-cover"
-      />
+      <div className="relative h-full w-full overflow-hidden rounded-xl border border-[#333] bg-[#111] shadow-[0_0_0_1px_rgba(255,255,255,0.02)]">
+        <img
+          src={project.image}
+          alt={project.title}
+          width={1200}
+          height={800}
+          loading="lazy"
+          onError={(event) => {
+            const target = event.currentTarget as HTMLImageElement;
+            target.onerror = null;
+            target.src = fallbackImage;
+          }}
+          className="absolute inset-0 h-full w-full object-cover"
+        />
 
-      {/* Gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/60 to-transparent" />
 
-      {/* Tech badges at bottom */}
-      <div className="absolute bottom-3 left-3 flex gap-2">
-        {project.technologies.map((tech, idx) => (
-          <div
-            key={idx}
-            className="bg-black/70 px-2 py-1 rounded flex items-center gap-1"
-          >
-            <tech.icon className="text-sm text-[#E50914]" />
-            <span className="text-xs text-white">{tech.name}</span>
-          </div>
-        ))}
-      </div>
-
-      {/* Hover overlay */}
-      <motion.div
-        className="absolute inset-0 bg-black/85 flex flex-col items-center justify-center p-6"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: isHovered ? 1 : 0 }}
-        transition={{ duration: 0.3 }}
-      >
-        <h3 className="text-xl font-bold text-white mb-3 text-center">
-          {project.title}
-        </h3>
-        <p className="text-sm text-[#b3b3b3] mb-4 text-center line-clamp-3">
-          {project.description}
-        </p>
-
-        <div className="flex gap-3">
-          {project.liveDemo && (
-            <motion.a
-              href={project.liveDemo}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 px-4 py-2 bg-[#E50914] text-white rounded-md text-sm font-semibold"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+        <div className="absolute bottom-3 left-3 right-3 flex flex-wrap gap-2">
+          {project.technologies.map((tech, idx) => (
+            <div
+              key={idx}
+              className="rounded-md border border-[#333] bg-black/70 px-2 py-1 text-[10px] text-white sm:text-xs"
             >
-              <FaExternalLinkAlt />
-              Live Demo
-            </motion.a>
-          )}
-          {project.github && (
-            <motion.a
-              href={project.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 px-4 py-2 bg-[#1f1f1f] text-white rounded-md text-sm font-semibold border border-[#E50914]/30"
-              whileHover={{ scale: 1.05, borderColor: "#E50914" }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <FaGithub />
-              GitHub
-            </motion.a>
-          )}
+              <span className="flex items-center gap-1">
+                <tech.icon className="text-[10px] text-[#E50914] sm:text-xs" />
+                {tech.name}
+              </span>
+            </div>
+          ))}
         </div>
-      </motion.div>
+
+        <motion.div
+          initial={false}
+          animate={{ opacity: reveal ? 1 : 0 }}
+          transition={{ duration: 0.2 }}
+          className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center bg-black/85 p-6 text-center md:pointer-events-auto md:group-hover:opacity-100 md:group-focus-visible:opacity-100"
+        >
+          <h3 className="mb-2 text-xl font-bold text-white">{project.title}</h3>
+          <p className="mb-4 max-w-full text-sm text-[#b3b3b3]">{project.description}</p>
+
+          <div className="flex flex-wrap justify-center gap-2">
+            {project.liveDemo && !project.liveDemo.includes("github.com") && (
+              <motion.a
+                href={project.liveDemo}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-md bg-[#E50914] px-3 py-2 text-xs font-semibold text-white"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <FaExternalLinkAlt />
+                Live Demo
+              </motion.a>
+            )}
+            {project.github && (
+              <motion.a
+                href={project.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-md border border-[#E50914]/30 bg-[#1f1f1f] px-3 py-2 text-xs font-semibold text-white"
+                whileHover={{ scale: 1.05, borderColor: "#E50914" }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <FaGithub />
+                GitHub
+              </motion.a>
+            )}
+            <button
+              type="button"
+              onClick={(event) => {
+                event.stopPropagation();
+                onOpen(project);
+              }}
+              className="rounded-md border border-[rgba(229,9,20,0.18)] bg-[#0f0f0f] px-3 py-2 text-xs font-semibold text-white"
+            >
+              Details
+            </button>
+          </div>
+        </motion.div>
+      </div>
     </motion.div>
   );
 }
@@ -186,8 +230,17 @@ function ProjectRow({
   title: string;
   projects: Project[];
 }) {
-  const ref = useRef(null);
+  const ref = useRef<HTMLDivElement | null>(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+
+  const scrollProjects = (direction: "left" | "right") => {
+    if (!ref.current) return;
+    ref.current.scrollBy({
+      left: direction === "left" ? -360 : 360,
+      behavior: "smooth",
+    });
+  };
 
   return (
     <motion.div
@@ -197,23 +250,45 @@ function ProjectRow({
       animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
       transition={{ duration: 0.6 }}
     >
-      <h3 className="text-2xl font-bold text-white mb-4 px-4 sm:px-6 lg:px-8">
-        {title}
-      </h3>
+      <div className="mb-4 flex items-center justify-between gap-3 px-4 sm:px-6 lg:px-8">
+        <h3 className="text-2xl font-bold text-white">{title}</h3>
+        <div className="hidden items-center gap-2 md:flex">
+          <button
+            type="button"
+            aria-label="Scroll projects left"
+            onClick={() => scrollProjects("left")}
+            className="flex h-9 w-9 items-center justify-center rounded-full border border-[#333] bg-[#1f1f1f] text-[#E50914] transition-colors hover:border-[#E50914]"
+          >
+            <FaChevronLeft />
+          </button>
+          <button
+            type="button"
+            aria-label="Scroll projects right"
+            onClick={() => scrollProjects("right")}
+            className="flex h-9 w-9 items-center justify-center rounded-full border border-[#333] bg-[#1f1f1f] text-[#E50914] transition-colors hover:border-[#E50914]"
+          >
+            <FaChevronRight />
+          </button>
+        </div>
+      </div>
 
       <div className="relative px-4 sm:px-6 lg:px-8">
-        <div className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide snap-x snap-mandatory">
+        <div className="flex gap-4 overflow-x-auto pb-6 pt-2 scroll-smooth snap-x snap-mandatory [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
           {projects.map((project, idx) => (
-            <ProjectCard key={idx} project={project} />
+            <ProjectCard key={`${title}-${idx}`} project={project} onOpen={setSelectedProject} />
           ))}
         </div>
       </div>
+
+      {selectedProject && (
+        <ProjectModal project={selectedProject} onClose={() => setSelectedProject(null)} />
+      )}
     </motion.div>
   );
 }
 
 export default function ProjectsSection() {
-  const ref = useRef(null);
+  const ref = useRef<HTMLDivElement | null>(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
@@ -245,16 +320,6 @@ export default function ProjectsSection() {
           />
         ))}
       </div>
-
-      <style jsx global>{`
-        .scrollbar-hide::-webkit-scrollbar {
-          display: none;
-        }
-        .scrollbar-hide {
-          -ms-overflow-style: none;
-          scrollbar-width: none;
-        }
-      `}</style>
     </section>
   );
 }

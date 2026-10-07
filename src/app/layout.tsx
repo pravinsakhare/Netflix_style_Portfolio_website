@@ -1,14 +1,20 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
-
-const inter = Inter({ subsets: ["latin"] });
+import { inter, display } from "@/lib/fonts";
 
 export const metadata: Metadata = {
-  title: "Pravin Sakhare - Cloud & DevOps Engineer",
-  description: "AWS Certified Cloud Practitioner and DevOps Engineer specializing in cloud infrastructure, automation, and system administration. Portfolio showcasing AWS projects and technical expertise.",
-  keywords: ["AWS", "Cloud Engineer", "DevOps", "Cloud Infrastructure", "Pravin Sakhare"],
+  title: "Pravin Sakhare - Cloud Operations Engineer",
+  description:
+    "Cloud operations professional focused on SaaS production operations, AWS, Kubernetes, incident management and monitoring.",
+  metadataBase: new URL("https://gzzmonk.space"),
+  openGraph: {
+    title: "Pravin Sakhare - Cloud Operations Engineer",
+    description:
+      "Cloud operations professional focused on SaaS production operations, AWS, Kubernetes, incident management and monitoring.",
+    url: "https://gzzmonk.space",
+  },
+  keywords: ["AWS", "Cloud Operations", "DevOps", "SRE", "Kubernetes", "Pravin Sakhare"],
 };
 
 export default function RootLayout({
@@ -18,7 +24,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={inter.className} suppressHydrationWarning>
+      <body className={`${inter.className} ${display.className}`} suppressHydrationWarning>
         {children}
       </body>
     </html>

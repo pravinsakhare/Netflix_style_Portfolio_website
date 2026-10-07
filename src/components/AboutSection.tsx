@@ -118,7 +118,7 @@ export default function AboutSection() {
           transition={{ duration: 0.6, delay: 0.8 }}
         >
           {[
-            { number: "2+", label: "Years Experience" },
+            { number: "1", label: "1 Year Experience" },
             { number: "10+", label: "Projects Completed" },
             { number: "2", label: "AWS Certifications" },
             { number: "500+", label: "Professionals Engaged" },
